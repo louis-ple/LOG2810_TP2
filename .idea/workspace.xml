@@ -4,8 +4,6 @@
     <list default="true" id="57d53c8c-a986-4e6e-89ba-0ed49026284b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Automate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Automate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Commande.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commande.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +30,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Desktop/TPTESTIJ" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Desktop/PolyMtl/3 Automne 2019/LOG2810/LOG2810TP1" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -75,7 +73,8 @@
       <option name="presentableId" value="Default" />
       <updated>1574138524407</updated>
       <workItem from="1574138527780" duration="585000" />
-      <workItem from="1574625440518" duration="10182000" />
+      <workItem from="1574625440518" duration="10441000" />
+      <workItem from="1574706444419" duration="2389000" />
     </task>
     <servers />
   </component>
@@ -87,7 +86,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

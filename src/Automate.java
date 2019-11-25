@@ -4,15 +4,18 @@
 //  Date : 2019-11-24
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class Automate {
 
-    public Automate() {};
+    private int nbEtats = 0;
 
+    private ArrayList<Objet> objets;
 
     //Lecture du lexique a partir du fichier texte
-    public void lecture(String path) throws FileNotFoundException
+    public void creerAutomate(String filePath) throws FileNotFoundException
     {
+
 
     }
 
