@@ -17,27 +17,13 @@ public class Main {
     {
         System.out.println("Test.");
 
-        Fenetre f = new Fenetre();
+        //Fenetre f = new Fenetre();
 
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Veuillez entrer le mot à rechercher : ");
         String s = sc.nextLine();
 
-        clearScreen();
-
         System.out.println("Vous recherchez le mot suivant : " + s);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }

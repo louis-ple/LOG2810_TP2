@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 
 public class Automate {
 
+    public Automate() {};
+
 
     //Lecture du lexique a partir du fichier texte
     public void lecture(String path) throws FileNotFoundException
