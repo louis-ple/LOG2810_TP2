@@ -14,6 +14,8 @@ public class Automate {
     private int nbEtats = 0;
 
     private ArrayList<Objet> objets;
+    private ArrayList<Objet> objetsSuggeres;
+
 
     public Automate()
     {
@@ -37,5 +39,11 @@ public class Automate {
     }
 
 
+
+    public ArrayList<Objet> trouverSuggestions(String filtreNom, String filtreCode, String filtreType){
+
+
+        return objetsSuggeres;
+    }
 
 }
