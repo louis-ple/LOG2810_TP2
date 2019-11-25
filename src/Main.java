@@ -21,9 +21,13 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Veuillez entrer le mot à rechercher : ");
-        String s = sc.nextLine();
+//        System.out.println("Veuillez entrer le mot à rechercher : ");
+//        String s = sc.nextLine();
+//
+//        System.out.println("Vous recherchez le mot suivant : " + s);
 
-        System.out.println("Vous recherchez le mot suivant : " + s);
+        Automate a = new Automate();
+
+        a.creerAutomate("C:\\Users\\Louis\\LOG2810_TP2\\src\\inventaire.txt");
     }
 }

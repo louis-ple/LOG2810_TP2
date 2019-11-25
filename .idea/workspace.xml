@@ -4,6 +4,7 @@
     <list default="true" id="57d53c8c-a986-4e6e-89ba-0ed49026284b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Automate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Automate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +75,7 @@
       <updated>1574138524407</updated>
       <workItem from="1574138527780" duration="585000" />
       <workItem from="1574625440518" duration="10441000" />
-      <workItem from="1574706444419" duration="2389000" />
+      <workItem from="1574706444419" duration="4143000" />
     </task>
     <servers />
   </component>
