@@ -12,38 +12,61 @@ import java.util.*;
 public class Automate {
 
     private int nbEtats = 0;
-
     private ArrayList<Objet> objets;
-    private ArrayList<Objet> objetsSuggeres;
+    private Commande commande;
 
-
-    public Automate()
-    {
+    public Automate() {
         this.objets = new ArrayList<Objet>();
+        this.commande = new Commande();
+    }
+
+    public Commande getCommande() {
+        return commande;
+    }
+
+    public ArrayList<Objet> getObjets() {
+        return objets;
+    }
+
+    public int getNbEtats() {
+        return nbEtats;
+    }
+
+    public void setNbEtats(int nbEtats) {
+        this.nbEtats = nbEtats;
     }
 
     //Lecture du lexique a partir du fichier texte
-    public void creerAutomate(String chemin) throws FileNotFoundException
-    {
+    public void creerAutomate(String chemin) throws FileNotFoundException {
         File fichier = new File(chemin);
         Scanner sc = new Scanner(fichier);
-
-        while(sc.hasNextLine())
-        {
+        while (sc.hasNextLine()) {
             String ligne = sc.nextLine();
-
             String[] vecteurLigne = ligne.split(" ");
-
-            objets.add( new Objet(vecteurLigne[0], vecteurLigne[1], vecteurLigne[2]) );
+            objets.add(new Objet(vecteurLigne[0], vecteurLigne[1], vecteurLigne[2]));
         }
     }
 
-
-
-    public ArrayList<Objet> trouverSuggestions(String filtreNom, String filtreCode, String filtreType){
-
-
-        return objetsSuggeres;
+    public ArrayList<Objet> trouverSuggestions(String filtreNom, String filtreCode, String filtreType) {
+        ArrayList<Objet> listeARetourner = new ArrayList<>();
+            for (Objet objet : objets) {
+                if (objet.getNom().startsWith(filtreNom) && objet.getCode().startsWith(filtreCode) && objet.getType().startsWith(filtreType)) {
+                    if (!commande.getPanier().contains(objet)) {
+                        listeARetourner.add(objet);
+                    }
+                }
+            }
+        return listeARetourner;
     }
 
+    public Objet trouverObjetUnique(String filtreNom, String filtreCode, String filtreType){
+        for (Objet objet : objets) {
+            if (objet.getNom().equals(filtreNom) && objet.getCode().equals(filtreCode) && objet.getType().equals(filtreType)) {
+                if (!commande.getPanier().contains(objet)) {
+                    return objet;
+                }
+            }
+        }
+        return null;
+    }
 }

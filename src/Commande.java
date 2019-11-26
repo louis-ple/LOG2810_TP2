@@ -3,6 +3,8 @@
 //  Auteurs (Matricule) : Jérémie Bédard (1952335) Yasmine Moumou (1962718) Louis Plessis (1933334)
 //  Date : 2019-11-24
 
+import java.util.ArrayList;
+
 public class Commande {
 
     //Masse des objets
@@ -15,10 +17,10 @@ public class Commande {
     private int nbObjetB;
     private int nbObjetC;
 
-    public Commande(int nbObjetA, int nbObjetB, int nbObjetC){
-        this.nbObjetA = nbObjetA;
-        this.nbObjetB = nbObjetB;
-        this.nbObjetC = nbObjetC;
+    private ArrayList<Objet> panier;
+
+    public Commande(){
+        this.panier = new ArrayList<>();
     }
 
     public int getNbObjetA() {
@@ -33,15 +35,37 @@ public class Commande {
         return nbObjetC;
     }
 
+    public ArrayList<Objet> getPanier() {
+        return panier;
+    }
+
+    public void addPanier(Objet objet){
+        panier.add(objet);
+    }
+
+    public void viderPanier(){
+        panier.clear();
+    }
+
     public boolean estVide() {
         if (getNombreTotalObjets() == 0){
             return true;
         }
         return false;
     }
-    public int masseTotale(){
 
-        return nbObjetA*masseA+nbObjetB*masseB+nbObjetC*masseC;
+    public int masseTotale(){
+        int masseTotale = 0;
+        for (Objet objet:panier) {
+            if (objet.getType() == "A"){
+                masseTotale += masseA;
+            }else if (objet.getType() == "B"){
+                masseTotale += masseB;
+            }else if (objet.getType() == "C"){
+                masseTotale += masseC;
+            }
+        }
+        return masseTotale;
     }
 
     public int getNombreTotalObjets(){
@@ -49,10 +73,8 @@ public class Commande {
     }
 
     public void afficherCommande(){
-
-        System.out.print( "Nombre d'objets A : "+ nbObjetA + "\n");
-        System.out.print( "Nombre d'objets B : "+ nbObjetB + "\n");
-        System.out.print( "Nombre d'objets C : "+ nbObjetC + "\n");
-
+        for (Objet objet:panier) {
+            objet.afficherObjet();
+        }
     }
 }
