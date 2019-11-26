@@ -6,75 +6,52 @@
 import java.util.ArrayList;
 
 public class Commande {
-
+    //Attributs
     //Masse des objets
     private final int masseA = 1;
     private final int masseB = 3;
     private final int masseC = 6;
 
-    //Nombre de chaque objets
-    private int nbObjetA;
-    private int nbObjetB;
-    private int nbObjetC;
-
     private ArrayList<Objet> panier;
 
+    //Constructeur
     public Commande(){
         this.panier = new ArrayList<>();
     }
 
-    public int getNbObjetA() {
-        return nbObjetA;
-    }
-
-    public int getNbObjetB() {
-        return nbObjetB;
-    }
-
-    public int getNbObjetC() {
-        return nbObjetC;
-    }
-
+    //getter
     public ArrayList<Objet> getPanier() {
         return panier;
     }
 
-    public void addPanier(Objet objet){
-        panier.add(objet);
-    }
-
+    //vide le panier
     public void viderPanier(){
         panier.clear();
     }
 
-    public boolean estVide() {
-        if (getNombreTotalObjets() == 0){
-            return true;
-        }
-        return false;
-    }
-
+    //calcule la masse totale du panier
     public int masseTotale(){
         int masseTotale = 0;
         for (Objet objet:panier) {
-            if (objet.getType() == "A"){
+            if (objet.getType().equals("A")){
                 masseTotale += masseA;
-            }else if (objet.getType() == "B"){
+            }else if (objet.getType().equals("B")){
                 masseTotale += masseB;
-            }else if (objet.getType() == "C"){
+            }else if (objet.getType().equals("C")){
                 masseTotale += masseC;
             }
         }
         return masseTotale;
     }
 
-    public int getNombreTotalObjets(){
-        return nbObjetA+nbObjetB+nbObjetC;
-    }
-
-    public void afficherCommande(){
+    //affiche le contenu du panier
+    public void afficherPanier(){
+        if (panier.isEmpty()){
+            System.out.println("panier vide");
+        }
         for (Objet objet:panier) {
             objet.afficherObjet();
         }
+        System.out.print("\n");
     }
 }

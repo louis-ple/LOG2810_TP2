@@ -12,99 +12,161 @@ public class Main {
     static String jayPath = "C:\\Users\\jeremie\\Documents\\structureDiscrete\\LOG2810_TP2\\src\\inventaire.txt";
     static String louisPath = "C:\\Users\\Louis\\LOG2810_TP2\\src\\inventaire.txt";
 
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
+    //enum des différents états de notre interface
+    private enum EtatInterface {menuPrincipal,faireSuggestion,menuSuggestion,ajoutPanier,viderPanier,passerCommande,afficherPanier,exit}
 
     public static void main(String[] args) throws FileNotFoundException {
         System.out.println("Test" + "\n");
 
         Automate a = new Automate();
+        Commande commande = new Commande();
         a.creerAutomate(jayPath);
 
         Scanner sc = new Scanner(System.in);
 
-        while (a.getNbEtats() != 6) {
-            switch (a.getNbEtats()) {
-                case 0:
+        EtatInterface etatCourant = EtatInterface.menuPrincipal;
+        int choix;
+        EtatInterface etatPrecedent = etatCourant;
+        ArrayList<Objet> suggestion = new ArrayList<>();
+        String nomObjet = null;
+        String typeObjet = null;
+        String codeObjet = null;
+        while (etatCourant != EtatInterface.exit) {
+            switch (etatCourant) {
+                case menuPrincipal:
                     System.out.println("---------------------------------");
                     System.out.println("Choisir quoi faire:" + "\n");
                     System.out.println("1: Faire une suggestion");
-                    System.out.println("2: Ajouter au panier");
-                    System.out.println("3: Passer une commande");
-                    System.out.println("4: Afficher le panier");
-                    System.out.println("5: Vider le panier");
-                    System.out.println("6: Exit" + "\n");
+                    System.out.println("2: Afficher le panier");
+                    System.out.println("3: Exit" + "\n");
                     System.out.println("Choix: ");
-                    a.setNbEtats(sc.nextInt());
+
+                    choix = sc.nextInt();
                     sc.nextLine();
+                    etatPrecedent = etatCourant;
+                    switch (choix){
+                        case 1:
+                            etatCourant = EtatInterface.faireSuggestion;
+                            break;
+                        case 2:
+                            etatCourant = EtatInterface.afficherPanier;
+                            break;
+                        case 3:
+                            etatCourant = EtatInterface.exit;
+                            break;
+                        default:
+                            System.out.println("choix invalide");
+                    }
                     System.out.println("---------------------------------");
                     break;
 
-                case 1:
+                case faireSuggestion:
                     System.out.println("-Mode de suggestion-");
+                    System.out.println("Veuillez appliquer un ou des filtres");
                     System.out.println("Nom: ");
-                    String nomRobot = sc.nextLine();
+                    nomObjet = sc.nextLine();
                     System.out.println("Type: ");
-                    String typeRobot = sc.nextLine();
+                    typeObjet = sc.nextLine();
                     System.out.println("Code: ");
-                    String codeRobot = sc.nextLine();
+                    codeObjet = sc.nextLine();
 
-                    ArrayList<Objet> suggestion;
-                    suggestion = a.trouverSuggestions(nomRobot, codeRobot, typeRobot);
+                    suggestion = a.trouverSuggestions(nomObjet, codeObjet, typeObjet,commande);
 
-                    System.out.println("Suggestions: " + "\n");
-                    System.out.println(("Nombre d'objets possibles: " + suggestion.size()));
-                    for (Objet afficher : suggestion) {
-                        afficher.afficherObjet();
-                    }
-                    a.setNbEtats(0);
-                    break;
-
-                case 2:
-                    System.out.println("-Mode d'ajout au panier-");
-                    
-                    System.out.println("\n" + "À ajouter au panier:");
-                    System.out.println("Nom: ");
-                    nomRobot = sc.nextLine();
-                    System.out.println("Type: ");
-                    typeRobot = sc.nextLine();
-                    System.out.println("Code: ");
-                    codeRobot = sc.nextLine();
-                    Objet objetAjouter = a.trouverObjetUnique(nomRobot, codeRobot, typeRobot);
-                    if (objetAjouter != null){
-                        a.getCommande().addPanier(objetAjouter);
+                    if (suggestion.isEmpty()){
+                        System.out.println("Aucun objet trouvé");
+                        etatCourant = EtatInterface.menuPrincipal;
                     }else {
-                        System.out.println("Objet introuvable");
+                        etatCourant = EtatInterface.menuSuggestion;
                     }
-                    a.setNbEtats(0);
                     break;
 
-                case 3:
-                    System.out.println("-Mode passage de commande-");
-                    if (a.getCommande().masseTotale() > 25) {
-                        System.out.println("Votre commande dépasse 25kg, le panier vas être vidé");
-                        a.getCommande().viderPanier();
-                    } else {
-                        for (Objet objet : a.getCommande().getPanier()) {
-                            a.getObjets().remove(objet);
+                case menuSuggestion:
+                    System.out.println("\n Suggestions: \n");
+                    System.out.println(("Nombre d'objets possibles: " + suggestion.size()));
+                    a.afficherSuggestion(suggestion);
+                    System.out.println("\n Choisir quoi faire: \n");
+                    System.out.println("1: Afficher le panier");
+                    System.out.println("2: Ajouter au panier");
+                    System.out.println("3: Vider le panier");
+                    System.out.println("4: Passer une commande");
+                    System.out.println("5: Retour menu principal");
+
+                    choix = sc.nextInt();
+                    sc.nextLine();
+                    etatPrecedent = etatCourant;
+                    switch (choix){
+                        case 1:
+                            etatCourant = EtatInterface.afficherPanier;
+                            break;
+                        case 2:
+                            etatCourant = EtatInterface.ajoutPanier;
+                            break;
+                        case 3:
+                            etatCourant = EtatInterface.viderPanier;
+                            break;
+                        case 4:
+                            etatCourant = EtatInterface.passerCommande;
+                            break;
+                        case 5:
+                            etatCourant = EtatInterface.menuPrincipal;
+                            break;
+                        default:
+                            System.out.println("choix invalide");
+                            etatCourant = EtatInterface.menuSuggestion;
+                    }
+                    break;
+
+                case ajoutPanier:
+                    System.out.println("-Mode d'ajout au panier-");
+                    System.out.println("Voulez-vous entrer dans ce mode? (o/n)");
+                    if (sc.nextLine().equals("o")) {
+                        System.out.println("\n Choisir parmis les suggestions précédentes:");
+
+                        choix = sc.nextInt();
+                        sc.nextLine();
+
+                        if (choix > suggestion.size()) {
+                            System.out.println("Objet introuvable");
+                        } else {
+                            commande.getPanier().add(suggestion.get(choix));
+                            suggestion = a.trouverSuggestions(nomObjet, codeObjet, typeObjet,commande);
                         }
-                        a.getCommande().viderPanier();
                     }
-                    a.setNbEtats(0);
+                    etatCourant = EtatInterface.menuSuggestion;
                     break;
 
-                case 4:
-                    System.out.println("-Mode affichage de la commande-");
-                    a.getCommande().afficherCommande();
-                    a.setNbEtats(0);
+                case passerCommande:
+                    System.out.println("-Mode passage de commande-");
+                    System.out.println("Voulez-vous entrer dans ce mode? (o/n)");
+                    if (sc.nextLine().equals("o")) {
+                        if (commande.masseTotale() >= 25) {
+                            System.out.println("Votre commande dépasse 25kg, le panier vas être vidé");
+                            commande.viderPanier();
+                        } else {
+                            for (Objet objet : commande.getPanier()) {
+                                a.getObjets().remove(objet);
+                            }
+                            commande.viderPanier();
+                            System.out.println("Merci, votre commande a été passée");
+                        }
+                    }
+                    etatCourant = EtatInterface.menuPrincipal;
                     break;
 
-                case 5:
-                    System.out.println("-Mode vidage de la commande-");
-                    a.getCommande().viderPanier();
-                    a.setNbEtats(0);
+                case afficherPanier:
+                    System.out.println("-Mode affichage du panier-");
+                    commande.afficherPanier();
+                    etatCourant = etatPrecedent;
+                    break;
+
+                case viderPanier:
+                    System.out.println("-Mode vidange du panier-");
+                    System.out.println("Voulez-vous entrer dans ce mode? (o/n)");
+                    if (sc.nextLine().equals("o")) {
+                        commande.viderPanier();
+                        suggestion = a.trouverSuggestions(nomObjet, codeObjet, typeObjet,commande);
+                    }
+                    etatCourant = EtatInterface.menuSuggestion;
                     break;
             }
         }

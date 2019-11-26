@@ -11,29 +11,20 @@ import java.util.*;
 
 public class Automate {
 
-    private int nbEtats = 0;
+    //Attributs
     private ArrayList<Objet> objets;
-    private Commande commande;
+    private int limiteSuggestions = 10;
+    private Etat etatCourant;
+    private enum Etat {trouverNom, trouverCode, trouverType, ajouterSuggestion};
 
+    //Constructeur
     public Automate() {
         this.objets = new ArrayList<Objet>();
-        this.commande = new Commande();
     }
 
-    public Commande getCommande() {
-        return commande;
-    }
-
+    //Getter
     public ArrayList<Objet> getObjets() {
         return objets;
-    }
-
-    public int getNbEtats() {
-        return nbEtats;
-    }
-
-    public void setNbEtats(int nbEtats) {
-        this.nbEtats = nbEtats;
     }
 
     //Lecture du lexique a partir du fichier texte
@@ -47,26 +38,44 @@ public class Automate {
         }
     }
 
-    public ArrayList<Objet> trouverSuggestions(String filtreNom, String filtreCode, String filtreType) {
+    //Retourne une liste d'objets en fonction des filtres appliqués et du contenu du panier
+    public ArrayList<Objet> trouverSuggestions(String filtreNom, String filtreCode, String filtreType, Commande commande) {
         ArrayList<Objet> listeARetourner = new ArrayList<>();
-            for (Objet objet : objets) {
-                if (objet.getNom().startsWith(filtreNom) && objet.getCode().startsWith(filtreCode) && objet.getType().startsWith(filtreType)) {
-                    if (!commande.getPanier().contains(objet)) {
-                        listeARetourner.add(objet);
-                    }
-                }
-            }
-        return listeARetourner;
-    }
-
-    public Objet trouverObjetUnique(String filtreNom, String filtreCode, String filtreType){
+        etatCourant = Etat.trouverNom;
         for (Objet objet : objets) {
-            if (objet.getNom().equals(filtreNom) && objet.getCode().equals(filtreCode) && objet.getType().equals(filtreType)) {
-                if (!commande.getPanier().contains(objet)) {
-                    return objet;
+            if (listeARetourner.size() < limiteSuggestions) {
+                switch (etatCourant) {
+                    case trouverNom:
+                        if (!objet.getNom().startsWith(filtreNom)) {
+                            break;
+                        }
+                    case trouverCode:
+                        if (!objet.getCode().startsWith(filtreCode)) {
+                            break;
+                        }
+                    case trouverType:
+                        if (!objet.getType().startsWith(filtreType)) {
+                            break;
+                        }
+                    case ajouterSuggestion:
+                        if (!commande.getPanier().contains(objet)) {
+                            listeARetourner.add(objet);
+                        }
+                        etatCourant = Etat.trouverNom;
+                        break;
                 }
             }
         }
-        return null;
+        return listeARetourner;
+    }
+
+    //Affichage des suggestions
+    public void afficherSuggestion(ArrayList<Objet> objets){
+        int i = 0;
+        for (Objet objet : objets) {
+            System.out.print(i+ ": ");
+            objet.afficherObjet();
+            i++;
+        }
     }
 }
