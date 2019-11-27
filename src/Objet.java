@@ -13,18 +13,18 @@ public class Objet {
     private String type;
 
     //Constructeur
-    Objet(String nom, String code, String type){
-        this.nom=nom;
-        this.code=code;
-        this.type=type;
+    Objet(String nom, String code, String type) {
+        this.nom = nom;
+        this.code = code;
+        this.type = type;
     }
 
     //Getters
-    public String getNom(){
+    public String getNom() {
         return nom;
     }
 
-    public String getCode(){
+    public String getCode() {
         return code;
     }
 
@@ -33,7 +33,7 @@ public class Objet {
     }
 
     //Affichage d'un objet
-    public void afficherObjet(){
+    public void afficherObjet() {
         System.out.println(nom + " " + code + " " + type);
     }
 }

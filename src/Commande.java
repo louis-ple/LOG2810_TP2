@@ -15,7 +15,7 @@ public class Commande {
     private ArrayList<Objet> panier;
 
     //Constructeur
-    public Commande(){
+    public Commande() {
         this.panier = new ArrayList<>();
     }
 
@@ -25,19 +25,19 @@ public class Commande {
     }
 
     //vide le panier
-    public void viderPanier(){
+    public void viderPanier() {
         panier.clear();
     }
 
     //calcule la masse totale du panier
-    public int masseTotale(){
+    public int masseTotale() {
         int masseTotale = 0;
-        for (Objet objet:panier) {
-            if (objet.getType().equals("A")){
+        for (Objet objet : panier) {
+            if (objet.getType().equals("A")) {
                 masseTotale += masseA;
-            }else if (objet.getType().equals("B")){
+            } else if (objet.getType().equals("B")) {
                 masseTotale += masseB;
-            }else if (objet.getType().equals("C")){
+            } else if (objet.getType().equals("C")) {
                 masseTotale += masseC;
             }
         }
@@ -45,11 +45,11 @@ public class Commande {
     }
 
     //affiche le contenu du panier
-    public void afficherPanier(){
-        if (panier.isEmpty()){
+    public void afficherPanier() {
+        if (panier.isEmpty()) {
             System.out.println("panier vide");
         }
-        for (Objet objet:panier) {
+        for (Objet objet : panier) {
             objet.afficherObjet();
         }
         System.out.print("\n");

@@ -15,7 +15,10 @@ public class Automate {
     private ArrayList<Objet> objets;
     private int limiteSuggestions = 10;
     private Etat etatCourant;
-    private enum Etat {trouverNom, trouverCode, trouverType, ajouterSuggestion};
+
+    private enum Etat {trouverNom, trouverCode, trouverType, ajouterSuggestion}
+
+    ;
 
     //Constructeur
     public Automate() {
@@ -70,10 +73,10 @@ public class Automate {
     }
 
     //Affichage des suggestions
-    public void afficherSuggestion(ArrayList<Objet> objets){
+    public void afficherSuggestion(ArrayList<Objet> objets) {
         int i = 0;
         for (Objet objet : objets) {
-            System.out.print(i+ ": ");
+            System.out.print(i + ": ");
             objet.afficherObjet();
             i++;
         }
