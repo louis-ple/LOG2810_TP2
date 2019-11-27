@@ -1,3 +1,8 @@
+//  LOG2810 - TP2 : AUTOMATES ET LANGAGES
+//  fichier: Objet.java
+//  Auteurs (Matricule) : Jérémie Bédard (1952335) Yasmine Moumou (1962718) Louis Plessis (1933334)
+//  Date : 2019-11-18
+
 import javax.print.DocFlavor;
 
 public class Objet {

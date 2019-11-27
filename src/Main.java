@@ -11,6 +11,7 @@ public class Main {
 
     static String jayPath = "C:\\Users\\jeremie\\Documents\\structureDiscrete\\LOG2810_TP2\\src\\inventaire.txt";
     static String louisPath = "C:\\Users\\Louis\\LOG2810_TP2\\src\\inventaire.txt";
+    static String yasPath = "E:\\Polytechnique\\2ème année\\Session 1\\LOG2810\\Labos\\TP2\\TP2\\LOG2810_TP2\\src\\inventaire.txt";
 
     //enum des différents états de notre interface
     private enum EtatInterface {menuPrincipal,faireSuggestion,menuSuggestion,ajoutPanier,viderPanier,passerCommande,afficherPanier,exit}
@@ -20,7 +21,7 @@ public class Main {
 
         Automate a = new Automate();
         Commande commande = new Commande();
-        a.creerAutomate(jayPath);
+        a.creerAutomate(yasPath);
 
         Scanner sc = new Scanner(System.in);
 
@@ -36,7 +37,7 @@ public class Main {
                 case menuPrincipal:
                     System.out.println("---------------------------------");
                     System.out.println("Choisir quoi faire:" + "\n");
-                    System.out.println("1: Faire une suggestion");
+                    System.out.println("1: Recherche d'objets");
                     System.out.println("2: Afficher le panier");
                     System.out.println("3: Exit" + "\n");
                     System.out.println("Choix: ");
@@ -120,7 +121,7 @@ public class Main {
                     System.out.println("-Mode d'ajout au panier-");
                     System.out.println("Voulez-vous entrer dans ce mode? (o/n)");
                     if (sc.nextLine().equals("o")) {
-                        System.out.println("\n Choisir parmis les suggestions précédentes:");
+                        System.out.println("\n Choisir parmis les suggestions précédentes (Entrez le numéro de l'objet):");
 
                         choix = sc.nextInt();
                         sc.nextLine();
@@ -160,7 +161,7 @@ public class Main {
                     break;
 
                 case viderPanier:
-                    System.out.println("-Mode vidange du panier-");
+                    System.out.println("-Mode vidage du panier-");
                     System.out.println("Voulez-vous entrer dans ce mode? (o/n)");
                     if (sc.nextLine().equals("o")) {
                         commande.viderPanier();
