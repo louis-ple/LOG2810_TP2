@@ -3,19 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="57d53c8c-a986-4e6e-89ba-0ed49026284b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LOG2810_TP2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LOG2810_TP2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LOG2810_TP2/Automate.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LOG2810_TP2/Automate.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LOG2810_TP2/Commande.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LOG2810_TP2/Commande.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LOG2810_TP2/Fenetre.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LOG2810_TP2/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LOG2810_TP2/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LOG2810_TP2/Objet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LOG2810_TP2/Objet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LOG2810_TP2/Panneau.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Automate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Automate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Commande.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commande.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Fenetre.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Objet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Objet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Panneau.java" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
