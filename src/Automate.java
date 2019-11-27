@@ -13,6 +13,8 @@ public class Automate {
 
     //Attributs
     private ArrayList<Objet> objets;
+    private enum Filtre{nom,type,code}
+    private int etatInitial = 0;
     private int limiteSuggestions = 10;
 
 
@@ -37,62 +39,55 @@ public class Automate {
         }
     }
 
+    //Filtre une liste d'objets dépendemment du filtres appliqué
+    private void filtreListe(String valeurFiltre, Filtre filtre, ArrayList<Objet> listeObjets){
+        if (!valeurFiltre.isBlank()) {
+            int etat = etatInitial;
+            String mot = "";
+            while (etat < valeurFiltre.length()){
+                ArrayList<Objet> listeObjetARetirer = new ArrayList<>();
+                for (Objet objet:listeObjets) {
+                    switch (filtre){
+                        case nom:
+                            mot = objet.getNom();
+                            break;
+                        case type:
+                            mot = objet.getType();
+                            break;
+                        case code:
+                            mot = objet.getCode();
+                            break;
+                    }
+                    if (mot.charAt(etat) != valeurFiltre.charAt(etat)){
+                        listeObjetARetirer.add(objet);
+                    }
+                }
+                if (!listeObjetARetirer.isEmpty()) {
+                    for (Objet objetARetirer : listeObjetARetirer) {
+                        listeObjets.remove(objetARetirer);
+                    }
+                }
+                etat++;
+            }
+        }
+    }
+
     //Retourne une liste d'objets en fonction des filtres appliqués et du contenu du panier
     public ArrayList<Objet> trouverSuggestions(String filtreNom, String filtreCode, String filtreType, Commande commande) {
         ArrayList<Objet> listeObjets = objets;
-        int etatInitial = 0;
-        int etat;
-        if (!filtreNom.isBlank()) {
-            etat = etatInitial;
-            while (etat < filtreNom.length()){
-                ArrayList<Objet> listeObjetARetirer = new ArrayList<>();
-                for (Objet objet:listeObjets) {
-                    if (objet.getNom().charAt(etat) != filtreNom.charAt(etat)){
-                        listeObjetARetirer.add(objet);
-                    }
-                }
-                if (!listeObjetARetirer.isEmpty()) {
-                    for (Objet objetARetirer : listeObjetARetirer) {
-                        listeObjets.remove(objetARetirer);
-                    }
-                }
-                etat++;
-            }
+
+        for (Objet objet:commande.getPanier()) {
+            listeObjets.remove(objet);
         }
-        if (!filtreCode.isBlank()) {
-            etat = etatInitial;
-            while (etat < filtreCode.length()){
-                ArrayList<Objet> listeObjetARetirer = new ArrayList<>();
-                for (Objet objet:listeObjets) {
-                    if (objet.getCode().charAt(etat) != filtreCode.charAt(etat)){
-                        listeObjetARetirer.add(objet);
-                    }
-                }
-                if (!listeObjetARetirer.isEmpty()) {
-                    for (Objet objetARetirer : listeObjetARetirer) {
-                        listeObjets.remove(objetARetirer);
-                    }
-                }
-                etat++;
-            }
+
+        filtreListe(filtreNom,Filtre.nom,listeObjets);
+        filtreListe(filtreCode,Filtre.code,listeObjets);
+        filtreListe(filtreType,Filtre.type,listeObjets);
+
+        while (listeObjets.size() > 10){
+            listeObjets.remove(listeObjets.size()-1);
         }
-        if (!filtreType.isBlank()) {
-            etat = etatInitial;
-            while (etat < filtreType.length()){
-                ArrayList<Objet> listeObjetARetirer = new ArrayList<>();
-                for (Objet objet:listeObjets) {
-                    if (objet.getType().charAt(etat) != filtreType.charAt(etat)){
-                        listeObjetARetirer.add(objet);
-                    }
-                }
-                if (!listeObjetARetirer.isEmpty()) {
-                    for (Objet objetARetirer : listeObjetARetirer) {
-                        listeObjets.remove(objetARetirer);
-                    }
-                }
-                etat++;
-            }
-        }
+
         return listeObjets;
     }
 
