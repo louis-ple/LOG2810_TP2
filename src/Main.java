@@ -21,7 +21,7 @@ public class Main {
 
         Automate a = new Automate();
         Commande commande = new Commande();
-        a.creerAutomate(yasPath);
+        a.creerAutomate(jayPath);
 
         Scanner sc = new Scanner(System.in);
 

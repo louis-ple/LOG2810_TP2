@@ -14,11 +14,7 @@ public class Automate {
     //Attributs
     private ArrayList<Objet> objets;
     private int limiteSuggestions = 10;
-    private Etat etatCourant;
 
-    private enum Etat {trouverNom, trouverCode, trouverType, ajouterSuggestion}
-
-    ;
 
     //Constructeur
     public Automate() {
@@ -43,33 +39,61 @@ public class Automate {
 
     //Retourne une liste d'objets en fonction des filtres appliqués et du contenu du panier
     public ArrayList<Objet> trouverSuggestions(String filtreNom, String filtreCode, String filtreType, Commande commande) {
-        ArrayList<Objet> listeARetourner = new ArrayList<>();
-        etatCourant = Etat.trouverNom;
-        for (Objet objet : objets) {
-            if (listeARetourner.size() < limiteSuggestions) {
-                switch (etatCourant) {
-                    case trouverNom:
-                        if (!objet.getNom().startsWith(filtreNom)) {
-                            break;
-                        }
-                    case trouverCode:
-                        if (!objet.getCode().startsWith(filtreCode)) {
-                            break;
-                        }
-                    case trouverType:
-                        if (!objet.getType().startsWith(filtreType)) {
-                            break;
-                        }
-                    case ajouterSuggestion:
-                        if (!commande.getPanier().contains(objet)) {
-                            listeARetourner.add(objet);
-                        }
-                        etatCourant = Etat.trouverNom;
-                        break;
+        ArrayList<Objet> listeObjets = objets;
+        int etatInitial = 0;
+        int etat;
+        if (!filtreNom.isBlank()) {
+            etat = etatInitial;
+            while (etat < filtreNom.length()){
+                ArrayList<Objet> listeObjetARetirer = new ArrayList<>();
+                for (Objet objet:listeObjets) {
+                    if (objet.getNom().charAt(etat) != filtreNom.charAt(etat)){
+                        listeObjetARetirer.add(objet);
+                    }
                 }
+                if (!listeObjetARetirer.isEmpty()) {
+                    for (Objet objetARetirer : listeObjetARetirer) {
+                        listeObjets.remove(objetARetirer);
+                    }
+                }
+                etat++;
             }
         }
-        return listeARetourner;
+        if (!filtreCode.isBlank()) {
+            etat = etatInitial;
+            while (etat < filtreCode.length()){
+                ArrayList<Objet> listeObjetARetirer = new ArrayList<>();
+                for (Objet objet:listeObjets) {
+                    if (objet.getCode().charAt(etat) != filtreCode.charAt(etat)){
+                        listeObjetARetirer.add(objet);
+                    }
+                }
+                if (!listeObjetARetirer.isEmpty()) {
+                    for (Objet objetARetirer : listeObjetARetirer) {
+                        listeObjets.remove(objetARetirer);
+                    }
+                }
+                etat++;
+            }
+        }
+        if (!filtreType.isBlank()) {
+            etat = etatInitial;
+            while (etat < filtreType.length()){
+                ArrayList<Objet> listeObjetARetirer = new ArrayList<>();
+                for (Objet objet:listeObjets) {
+                    if (objet.getType().charAt(etat) != filtreType.charAt(etat)){
+                        listeObjetARetirer.add(objet);
+                    }
+                }
+                if (!listeObjetARetirer.isEmpty()) {
+                    for (Objet objetARetirer : listeObjetARetirer) {
+                        listeObjets.remove(objetARetirer);
+                    }
+                }
+                etat++;
+            }
+        }
+        return listeObjets;
     }
 
     //Affichage des suggestions
